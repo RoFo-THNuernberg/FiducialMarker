@@ -29,6 +29,7 @@ void ofApp::update() {
 	ofSetWindowTitle(s.str());
 	s.str("");
 	//cam.update();
+	std::cout << "test";
 
 }
 
