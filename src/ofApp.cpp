@@ -17,7 +17,8 @@ void ofApp::setup(){
 	ofAddListener(tuio.RemoveTuioObject, this, &ofApp::tuioRemoved);
 
 	tuio.connect(false);
-	cout << "connect: " << tuio.isConnected() << endl;
+	//cout << "connect: " << tuio.isConnected() << endl;
+	pub_ = n_.advertise<std_msgs::String>("chatter", 1000);
 	
 	
 }
@@ -29,7 +30,16 @@ void ofApp::update() {
 	ofSetWindowTitle(s.str());
 	s.str("");
 	//cam.update();
-	std::cout << "test";
+
+	std_msgs::String msg;
+	std::stringstream ss;
+	ss << "Marker " << tempMarkerID << "// x: " <<xReal << " cm , y: " << yReal << " cm" << endl;
+	msg.data = ss.str();
+
+	ROS_INFO("%s", msg.data.c_str());
+	pub_.publish(msg);
+	ros::spinOnce();
+
 
 }
 
@@ -61,9 +71,14 @@ void ofApp::draw(){
 		string id = ofToString(objects[i].objectID);
 		ofDrawBitmapString(id, objects[i].pos.x,objects[i].pos.y);
 		
+		
 		//getReal Coordinates
-		std::cout << "ID " << objects[i].objectID "// x (pixel):" << objects[i].pos.x << " x (cm):" << (((objects[i].pos.x - xField)/widthField)*widthValReal)<<" y (pixel):" << objects[i].pos.x << " y (cm):" << /*Hier noch y einsetzen*/<< endl;
-	
+		if(setField)
+		{	
+		xReal = (((objects[i].pos.x - xField)/widthField)*widthValReal);
+		yReal = (((yField-objects[i].pos.y)/heightField)*heightValReal);
+		}
+		
 		
 	}
 }
@@ -129,7 +144,14 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-		std::cout << "objects.size(): " <<objects.size() << std::endl;
+		for (int i = 0; i < objects.size(); i++)
+	{
+		//getReal Coordinates
+		if(setField)
+		{	
+		std::cout << "ID " << objects[i].objectID << "// x (pixel):" << objects[i].pos.x << " x (cm):" << xReal <<" y (pixel):" << objects[i].pos.x << " y (cm):" << yReal<< endl;
+		}	
+	}
 }
 
 //--------------------------------------------------------------

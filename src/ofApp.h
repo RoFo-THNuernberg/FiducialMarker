@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "ofxTuio.h"
+#include <ros/ros.h>
+#include <std_msgs/String.h>
 #include <sstream>
 
 #define PICTURE_WIDTH 1280
@@ -47,8 +49,13 @@ class ofApp : public ofBaseApp{
 		stringstream s;
 		ofImage test;
 
+		float xReal = 0.0,yReal = 0.0;
 		int xField = 0, yField = 0, widthField = 0, heightField = 0;
-		int widthValReal = 0, heightValReal = 0;
+		int widthValReal = 0, heightValReal = 0, tempMarkerID =0;
 		bool setField = 0;
+
+		//Ros
+		ros::NodeHandle n_;
+		ros::Publisher pub_;
 		
 };
