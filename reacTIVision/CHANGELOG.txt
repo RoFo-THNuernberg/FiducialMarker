@@ -1,0 +1,71 @@
+reacTIVision 1.6
+————————————————
+* converted portVideo into an external LGPL library
+  - allow camera selection during runtime (press K)
+  - process all available cameras and image formats
+  - extended camera configuration and control options
+* enabled alternative amoeba symbol sets (default, small, tiny)
+* fully implemented /tuio/2Dblb profile to detect plain blobs, 
+  plus optional blobs for fingers and fiducials
+* improved precision and robustness of finger tracking
+* improved angle and position resolution of fiducial tracking
+* optional 1EUR filter to clean  position and angle jitter
+* (beta) Yamaarashi 20bit fiducials (one million IDs)
+* integrated the TUIO 1.1 library
+  allows alternative UDP, TCP, Web and Flash transport
+* completely removed SDL dependencies for all non-GUI classes
+* removed the classic fiducials and legacy amoeba tree
+* removed the alternative MIDI functionality
+  (this should be provided by an external TUIOtoMIDI converter)
+
+reacTIVision 1.5.2
+------------------
+* reduced fiducial false positives (assuming uniform leaf node size)
+* native PS3Eye camera support on Windows
+* add TUIO source name configuration option
+* allow .reacTIVision config in home directory on Linux
+* add list_devices batch file on Windows
+
+reacTIVision 1.5.1
+—————————————————-
+* revert FrameEqualizer to equalization rather than subtraction
+* fixed the calibration distortion for wide camera formats
+* correctly save updated camera configuration on exit
+* implemented camera format enumeration on Windows
+* added a dedicated PS3 camera driver on MacOSX (thanks to Sebestyén Gábor)
+* implemented GAMMA and POWERLINE camera configuration on MaxOSX
+* implemented CONTRAST camera configuration on Windows
+* implemented V4L2_PIX_FMT_GREY in Video4Linux2 (for SUR40)
+* implemented STEPWISE camera formats in Video4Linux2 (for raspicam)
+* improved SDL event handling and adaptive VSync (for higher fps)
+* updated the SDL2 Framework to 2.0.4
+* code sign MacOSX application
+* add Windows 64bit build
+
+reacTIVision 1.5
+————————————————
+* new AVFoundation camera driver for MacOS X (including controls)
+* new videoInput camera driver for Windows (including controls)
+* improved Video4Linux2 camera driver for Linux (including controls)
+* list all available cameras and formats (via -l startup argument)
+* support MJPEG decompression for higher USB camera frame rates 
+* support IIDC-over-USB cameras through libdc1394
+* added frame cropping configuration (xoffset,yoffset,xwidth,yheight)
+* multithreaded thresholder for reduced latency on multicore CPUs
+* allow the adjustment of the threshold tile size
+* updated FrameEqualizer for faster background subtracion 
+* sending correct TUIO 1.1 source messages
+* added a quicker and less tedious calibration mode
+* migrated the user interface to SDL 2.0 (less CPU overhead)
+* fixed a MIDI configuration file location bug on MacOS X
+* added fullscreen toggle (via F1 key)
+* added a headless mode (via -n startup argument)
+* improved Linux desktop integration
+* updated oscpack, tinyxml, portmidi and dc1394 libraries
+* added x86_64 and dropped PPC architecture on MacOS X
+* provide x86_64 and i686 binaries for Mac OS X and Linux
+* updated XCode and Visual Studio 2012 projects
+* added a project for the Codeblocks IDE on Linux
+* removed the dtouch fiducial tracker
+* removed the now outdated VdigGrab, DSVideolib and Video4Linux drivers
+* new application icon

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="reacTIVision" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="build/Debug/reacTIVision" prefix_auto="1" extension_auto="1" />
+				<Option object_output="build/Debug/obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add option="-DLINUX" />
+					<Add option="-DOSC_LITTLE_ENDIAN" />
+					<Add directory="/usr/include/SDL2" />
+					<Add directory="../ext/oscpack" />
+					<Add directory="../ext/portvideo/tinyxml" />
+					<Add directory="../common" />
+					<Add directory="../ext/libfidtrack" />
+					<Add directory="../ext/portvideo/common" />
+					<Add directory="../ext/portvideo/interface" />
+					<Add directory="../ext/portvideo/linux" />
+					<Add directory="../ext/tuio" />
+				</Compiler>
+				<Linker>
+					<Add library="SDL2" />
+					<Add library="dc1394" />
+					<Add library="pthread" />
+					<Add library="turbojpeg" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="build/Release/reacTIVision" prefix_auto="1" extension_auto="1" />
+				<Option object_output="build/Release/obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-w" />
+					<Add option="-Ofast" />
+					<Add option="-DLINUX" />
+					<Add option="-DOSC_LITTLE_ENDIAN" />
+					<Add option="-DNDEBUG" />
+					<Add directory="/usr/include/SDL2" />
+					<Add directory="../ext/oscpack" />
+					<Add directory="../ext/portvideo/tinyxml" />
+					<Add directory="../common" />
+					<Add directory="../ext/libfidtrack" />
+					<Add directory="../ext/portvideo/common" />
+					<Add directory="../ext/portvideo/interface" />
+					<Add directory="../ext/portvideo/linux" />
+					<Add directory="../ext/tuio" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="SDL2" />
+					<Add library="pthread" />
+					<Add library="dc1394" />
+					<Add library="turbojpeg" />
+				</Linker>
+			</Target>
+			<Target title="Profile">
+				<Option output="build/Debug/reacTIVision" prefix_auto="1" extension_auto="1" />
+				<Option object_output="build/Debug/obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-pg" />
+					<Add option="-g" />
+					<Add option="-DLINUX" />
+					<Add option="-DOSC_LITTLE_ENDIAN" />
+					<Add directory="/usr/include/SDL2" />
+					<Add directory="../ext/oscpack" />
+					<Add directory="../ext/portvideo/tinyxml" />
+					<Add directory="../common" />
+					<Add directory="../ext/libfidtrack" />
+					<Add directory="../ext/portvideo/common" />
+					<Add directory="../ext/portvideo/interface" />
+					<Add directory="../ext/portvideo/linux" />
+					<Add directory="../ext/tuio" />
+				</Compiler>
+				<Linker>
+					<Add option="-pg" />
+					<Add library="SDL2" />
+					<Add library="dc1394" />
+					<Add library="pthread" />
+					<Add library="turbojpeg" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../common/BlobMatrix.cpp" />
+		<Unit filename="../common/BlobMatrix.h" />
+		<Unit filename="../common/BlobObject.cpp" />
+		<Unit filename="../common/BlobObject.h" />
+		<Unit filename="../common/CalibrationEngine.cpp" />
+		<Unit filename="../common/CalibrationEngine.h" />
+		<Unit filename="../common/CalibrationGrid.cpp" />
+		<Unit filename="../common/CalibrationGrid.h" />
+		<Unit filename="../common/FidtrackFinder.cpp" />
+		<Unit filename="../common/FidtrackFinder.h" />
+		<Unit filename="../common/FiducialFinder.cpp" />
+		<Unit filename="../common/FiducialFinder.h" />
+		<Unit filename="../common/FiducialObject.h" />
+		<Unit filename="../common/FrameThresholder.cpp" />
+		<Unit filename="../common/FrameThresholder.h" />
+		<Unit filename="../common/Main.cpp" />
+		<Unit filename="../common/Main.h" />
+		<Unit filename="../ext/libfidtrack/default_trees.h" />
+		<Unit filename="../ext/libfidtrack/dump_graph.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../ext/libfidtrack/dump_graph.h" />
+		<Unit filename="../ext/libfidtrack/fidtrackX.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../ext/libfidtrack/fidtrackX.h" />
+		<Unit filename="../ext/libfidtrack/floatpoint.h" />
+		<Unit filename="../ext/libfidtrack/segment.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../ext/libfidtrack/segment.h" />
+		<Unit filename="../ext/libfidtrack/tiled_bernsen_threshold.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../ext/libfidtrack/tiled_bernsen_threshold.h" />
+		<Unit filename="../ext/libfidtrack/topologysearch.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../ext/libfidtrack/topologysearch.h" />
+		<Unit filename="../ext/libfidtrack/treeidmap.cpp" />
+		<Unit filename="../ext/libfidtrack/treeidmap.h" />
+		<Unit filename="../ext/oscpack/ip/IpEndpointName.cpp" />
+		<Unit filename="../ext/oscpack/ip/IpEndpointName.h" />
+		<Unit filename="../ext/oscpack/ip/NetworkingUtils.h" />
+		<Unit filename="../ext/oscpack/ip/PacketListener.h" />
+		<Unit filename="../ext/oscpack/ip/TimerListener.h" />
+		<Unit filename="../ext/oscpack/ip/UdpSocket.h" />
+		<Unit filename="../ext/oscpack/ip/posix/NetworkingUtils.cpp" />
+		<Unit filename="../ext/oscpack/ip/posix/UdpSocket.cpp" />
+		<Unit filename="../ext/oscpack/osc/MessageMappingOscPacketListener.h" />
+		<Unit filename="../ext/oscpack/osc/OscException.h" />
+		<Unit filename="../ext/oscpack/osc/OscHostEndianness.h" />
+		<Unit filename="../ext/oscpack/osc/OscOutboundPacketStream.cpp" />
+		<Unit filename="../ext/oscpack/osc/OscOutboundPacketStream.h" />
+		<Unit filename="../ext/oscpack/osc/OscPacketListener.h" />
+		<Unit filename="../ext/oscpack/osc/OscPrintReceivedElements.cpp" />
+		<Unit filename="../ext/oscpack/osc/OscPrintReceivedElements.h" />
+		<Unit filename="../ext/oscpack/osc/OscReceivedElements.cpp" />
+		<Unit filename="../ext/oscpack/osc/OscReceivedElements.h" />
+		<Unit filename="../ext/oscpack/osc/OscTypes.cpp" />
+		<Unit filename="../ext/oscpack/osc/OscTypes.h" />
+		<Unit filename="../ext/portvideo/common/CameraEngine.cpp" />
+		<Unit filename="../ext/portvideo/common/CameraEngine.h" />
+		<Unit filename="../ext/portvideo/common/CameraTool.cpp" />
+		<Unit filename="../ext/portvideo/common/CameraTool.h" />
+		<Unit filename="../ext/portvideo/common/ConsoleInterface.cpp" />
+		<Unit filename="../ext/portvideo/common/ConsoleInterface.h" />
+		<Unit filename="../ext/portvideo/common/FileCamera.cpp" />
+		<Unit filename="../ext/portvideo/common/FileCamera.h" />
+		<Unit filename="../ext/portvideo/common/FolderCamera.cpp" />
+		<Unit filename="../ext/portvideo/common/FolderCamera.h" />
+		<Unit filename="../ext/portvideo/common/FrameProcessor.h" />
+		<Unit filename="../ext/portvideo/common/RingBuffer.cpp" />
+		<Unit filename="../ext/portvideo/common/RingBuffer.h" />
+		<Unit filename="../ext/portvideo/common/UserInterface.h" />
+		<Unit filename="../ext/portvideo/common/VisionEngine.cpp" />
+		<Unit filename="../ext/portvideo/common/VisionEngine.h" />
+		<Unit filename="../ext/portvideo/interface/ConsoleInterface.h" />
+		<Unit filename="../ext/portvideo/interface/Resources.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../ext/portvideo/interface/Resources.h" />
+		<Unit filename="../ext/portvideo/interface/SDLinterface.cpp" />
+		<Unit filename="../ext/portvideo/interface/SDLinterface.h" />
+		<Unit filename="../ext/portvideo/linux/DC1394Camera.cpp" />
+		<Unit filename="../ext/portvideo/linux/DC1394Camera.h" />
+		<Unit filename="../ext/portvideo/linux/V4Linux2Camera.cpp" />
+		<Unit filename="../ext/portvideo/linux/V4Linux2Camera.h" />
+		<Unit filename="../ext/portvideo/tinyxml/tinyxml2.cpp" />
+		<Unit filename="../ext/portvideo/tinyxml/tinyxml2.h" />
+		<Unit filename="../ext/tuio/FlashSender.cpp" />
+		<Unit filename="../ext/tuio/FlashSender.h" />
+		<Unit filename="../ext/tuio/LibExport.h" />
+		<Unit filename="../ext/tuio/OneEuroFilter.cpp" />
+		<Unit filename="../ext/tuio/OneEuroFilter.h" />
+		<Unit filename="../ext/tuio/OscSender.h" />
+		<Unit filename="../ext/tuio/TcpSender.cpp" />
+		<Unit filename="../ext/tuio/TcpSender.h" />
+		<Unit filename="../ext/tuio/TuioBlob.cpp" />
+		<Unit filename="../ext/tuio/TuioBlob.h" />
+		<Unit filename="../ext/tuio/TuioContainer.cpp" />
+		<Unit filename="../ext/tuio/TuioContainer.h" />
+		<Unit filename="../ext/tuio/TuioCursor.cpp" />
+		<Unit filename="../ext/tuio/TuioCursor.h" />
+		<Unit filename="../ext/tuio/TuioDispatcher.cpp" />
+		<Unit filename="../ext/tuio/TuioDispatcher.h" />
+		<Unit filename="../ext/tuio/TuioListener.h" />
+		<Unit filename="../ext/tuio/TuioManager.cpp" />
+		<Unit filename="../ext/tuio/TuioManager.h" />
+		<Unit filename="../ext/tuio/TuioObject.cpp" />
+		<Unit filename="../ext/tuio/TuioObject.h" />
+		<Unit filename="../ext/tuio/TuioPoint.cpp" />
+		<Unit filename="../ext/tuio/TuioPoint.h" />
+		<Unit filename="../ext/tuio/TuioServer.cpp" />
+		<Unit filename="../ext/tuio/TuioServer.h" />
+		<Unit filename="../ext/tuio/TuioTime.cpp" />
+		<Unit filename="../ext/tuio/TuioTime.h" />
+		<Unit filename="../ext/tuio/UdpSender.cpp" />
+		<Unit filename="../ext/tuio/UdpSender.h" />
+		<Unit filename="../ext/tuio/WebSockSender.cpp" />
+		<Unit filename="../ext/tuio/WebSockSender.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

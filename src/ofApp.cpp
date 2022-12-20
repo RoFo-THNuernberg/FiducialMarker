@@ -3,13 +3,13 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	
-	
-	//cam.setDeviceID(0);
-	//cam.setup(PICTURE_WIDTH, PICTURE_HEIGHT);
-
+	ofSetWindowShape(PICTURE_WIDTH,PICTURE_HEIGHT);
 	ofBackground(0);
 	ofSetFrameRate(60);
 
+	
+	//openFramworks TUIO-Client setup
+	//======================================================
 	tuio.setup(new ofxTuioUdpReceiver(3333));
 
 	ofAddListener(tuio.AddTuioObject, this, &ofApp::tuioAdded);
@@ -17,28 +17,36 @@ void ofApp::setup(){
 	ofAddListener(tuio.RemoveTuioObject, this, &ofApp::tuioRemoved);
 
 	tuio.connect(false);
-	//cout << "connect: " << tuio.isConnected() << endl;
-	pub_ = n_.advertise<std_msgs::String>("chatter", 1000);
-	
+	//======================================================
+
+	//Ros create publisher
+	//======================================================
+	//pub_ = n_.advertise<std_msgs::String>("chatter", 1000);
+	//======================================================
 	
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
 	
+	//Set Windowtitle
+	//======================================================
 	s << ofGetFrameRate();
 	ofSetWindowTitle(s.str());
 	s.str("");
-	//cam.update();
+	//======================================================
 
+	//Create and publish ROS messages
+	//======================================================
 	std_msgs::String msg;
 	std::stringstream ss;
-	ss << "Marker " << tempMarkerID << "// x: " <<xReal << " cm , y: " << yReal << " cm" << endl;
+	//ss << "Marker " << tempMarkerID << "// x: " <<xReal << " cm , y: " << yReal << " cm" << endl;
 	msg.data = ss.str();
 
-	ROS_INFO("%s", msg.data.c_str());
-	pub_.publish(msg);
-	ros::spinOnce();
+	//ROS_INFO("%s", msg.data.c_str());
+	//pub_.publish(msg);
+	//ros::spinOnce();
+	//======================================================
 
 
 }
@@ -46,11 +54,11 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-	//cam.draw(0,0,PICTURE_WIDTH,PICTURE_HEIGHT);
-	//vector<object> o = objects;
-	
-	ofNoFill();
 
+	ofNoFill(); //shapes with no fill
+
+	//Draw Field 
+	//======================================================
 	if(setField)
 	{
 		ofSetColor(255);
@@ -59,28 +67,33 @@ void ofApp::draw(){
 		ofDrawLine(xField,yField,xField+widthField + 30,yField);
 		
 	}
-	
+	//======================================================
 
-	
+	//Draw Robots
+	//======================================================
 	for (int i = 0; i < objects.size(); i++)
 	{
 		
 		// draw Robots
 		ofSetColor(0,0,255);
-		ofDrawCircle(objects[i].pos.x, objects[i].pos.y , 20);
+		ofDrawCircle(objects[i].pos.x, objects[i].pos.y , ROBOT_RADIUS);
 		string id = ofToString(objects[i].objectID);
 		ofDrawBitmapString(id, objects[i].pos.x,objects[i].pos.y);
-		
+
+		ofPushMatrix();
+		ofTranslate(objects[i].pos.x, objects[i].pos.y );
+		ofRotateZDeg(objects[i].angle);
+		ofDrawLine(0,-(ROBOT_RADIUS-5),0,-(ROBOT_RADIUS+5));
+		ofPopMatrix();
 		
 		//getReal Coordinates
 		if(setField)
 		{	
-		xReal = (((objects[i].pos.x - xField)/widthField)*widthValReal);
-		yReal = (((yField-objects[i].pos.y)/heightField)*heightValReal);
+		objects[i].xReal = (((objects[i].pos.x - xField)/widthField)*widthValReal);
+		objects[i].yReal = (((yField-objects[i].pos.y)/heightField)*heightValReal);
 		}
-		
-		
 	}
+	//======================================================
 }
 
 //--------------------------------------------------------------
@@ -90,7 +103,9 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-		
+
+	//Determine Field if F1 is pressed
+	//======================================================	
 		if(key == OF_KEY_F1)
 		{
 			setField = false;
@@ -124,7 +139,9 @@ void ofApp::keyReleased(int key){
 			}
 			setField = true;
 			
+			//std::cout << "xField = " << xField << " yField = " << yField << " widthField = " << widthField << " heightField = " << heightField << std::endl;
 		}
+	//======================================================
 }
 
 //--------------------------------------------------------------
@@ -144,14 +161,18 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
+
+	//Console Out of actual Positions of Robots 
+	//======================================================
 		for (int i = 0; i < objects.size(); i++)
-	{
+		{
 		//getReal Coordinates
-		if(setField)
-		{	
-		std::cout << "ID " << objects[i].objectID << "// x (pixel):" << objects[i].pos.x << " x (cm):" << xReal <<" y (pixel):" << objects[i].pos.x << " y (cm):" << yReal<< endl;
-		}	
-	}
+			if(setField)
+			{	
+			std::cout << "ID " << objects[i].objectID << "// x (pixel):" << objects[i].pos.x << " x (cm):" << objects[i].xReal <<" y (pixel):" << objects[i].pos.y << " y (cm):" << objects[i].yReal<< " Angle (Deg): " << objects[i].angle <<endl;
+			}	
+		}
+	//======================================================
 }
 
 //--------------------------------------------------------------
@@ -215,11 +236,11 @@ void ofApp::tuioUpdated(ofxTuioObject& tuioObject)
 
 	}
 
-	for (int i = 0; i < o.size(); i++)
+	/*for (int i = 0; i < o.size(); i++)
 	{
-		//cout << "update " << objectID << " at Session " << id << "    xPos =" << o[i].pos.x << "    yPos =" << o[i].pos.y << "    angle=" << o[i].angle << endl;
+		cout << "update " << objectID << " at Session " << id << "    xPos =" << o[i].pos.x << "    yPos =" << o[i].pos.y << "    angle=" << o[i].angle << endl;
 	
-	}
+	}*/
 
 	objects = o;
 }

@@ -9,6 +9,7 @@
 #define PICTURE_WIDTH 1280
 #define PICTURE_HEIGHT 720
 #define OBJECT_SIZE 60
+#define ROBOT_RADIUS 20
 
 
 class ofApp : public ofBaseApp{
@@ -39,6 +40,8 @@ class ofApp : public ofBaseApp{
 			long sessionID;
 			long objectID;
 			long angle;
+			float xReal;
+			float yReal;
 		};
 		vector<object> objects;
 
@@ -49,7 +52,7 @@ class ofApp : public ofBaseApp{
 		stringstream s;
 		ofImage test;
 
-		float xReal = 0.0,yReal = 0.0;
+		//float xReal = 0.0,yReal = 0.0;
 		int xField = 0, yField = 0, widthField = 0, heightField = 0;
 		int widthValReal = 0, heightValReal = 0, tempMarkerID =0;
 		bool setField = 0;
