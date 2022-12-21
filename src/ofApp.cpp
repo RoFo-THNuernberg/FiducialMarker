@@ -19,9 +19,10 @@ void ofApp::setup(){
 	tuio.connect(false);
 	//======================================================
 
+
 	//Ros create publisher
 	//======================================================
-	//pub_ = n_.advertise<std_msgs::String>("chatter", 1000);
+	pub_ = n_.advertise<std_msgs::String>(pub_sub_name, 1000);
 	//======================================================
 	
 }
@@ -40,12 +41,19 @@ void ofApp::update() {
 	//======================================================
 	std_msgs::String msg;
 	std::stringstream ss;
-	//ss << "Marker " << tempMarkerID << "// x: " <<xReal << " cm , y: " << yReal << " cm" << endl;
-	msg.data = ss.str();
+	for(int i = 0;i<objects.size();i++)
+	{
+		if(objects[i].objectID == 4)
+			{
+			ss << objects[i].objectID << "#" <<objects[i].xReal << "," << objects[i].yReal << "," << (360-(objects[i].angle -90))%360  << endl;
+			msg.data = ss.str();
 
-	//ROS_INFO("%s", msg.data.c_str());
-	//pub_.publish(msg);
-	//ros::spinOnce();
+			ROS_INFO("%s", msg.data.c_str());
+			pub_.publish(msg);
+			ros::spinOnce();
+			}
+	}
+
 	//======================================================
 
 
@@ -169,7 +177,7 @@ void ofApp::mouseReleased(int x, int y, int button){
 		//getReal Coordinates
 			if(setField)
 			{	
-			std::cout << "ID " << objects[i].objectID << "// x (pixel):" << objects[i].pos.x << " x (cm):" << objects[i].xReal <<" y (pixel):" << objects[i].pos.y << " y (cm):" << objects[i].yReal<< " Angle (Deg): " << objects[i].angle <<endl;
+			std::cout << "ID " << objects[i].objectID << "// x (pixel):" << objects[i].pos.x << " x (cm):" << objects[i].xReal <<" y (pixel):" << objects[i].pos.y << " y (cm):" << objects[i].yReal<< " Angle (Deg): " <<(360-(objects[i].angle -90))%360 <<endl;
 			}	
 		}
 	//======================================================

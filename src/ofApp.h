@@ -43,6 +43,9 @@ class ofApp : public ofBaseApp{
 			float xReal;
 			float yReal;
 		};
+
+		const std::string pub_sub_name = "/Robot1/pose2DCam"; //
+
 		vector<object> objects;
 
 		ofxTuioReceiver tuio;
