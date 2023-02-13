@@ -620,7 +620,9 @@ obj/linux64/Release/src/ofApp.o: \
  /opt/ros/noetic/include/ros/param.h /opt/ros/noetic/include/ros/topic.h \
  /opt/ros/noetic/include/ros/node_handle.h \
  /opt/ros/noetic/include/std_msgs/String.h \
- /opt/ros/noetic/include/ros/message_operations.h
+ /opt/ros/noetic/include/ros/message_operations.h \
+ /opt/ros/noetic/include/geometry_msgs/Pose2D.h \
+ /opt/ros/noetic/include/turtlesim/Pose.h
 
 /home/kamera/Bildverarbeitung/OF/apps/myApps/RobotImageClient/src/ofApp.h:
 
@@ -1907,3 +1909,7 @@ obj/linux64/Release/src/ofApp.o: \
 /opt/ros/noetic/include/std_msgs/String.h:
 
 /opt/ros/noetic/include/ros/message_operations.h:
+
+/opt/ros/noetic/include/geometry_msgs/Pose2D.h:
+
+/opt/ros/noetic/include/turtlesim/Pose.h:

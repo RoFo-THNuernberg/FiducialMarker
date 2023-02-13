@@ -1,4 +1,6 @@
 #include "ofApp.h"
+#include "geometry_msgs/Pose2D.h"
+#include "turtlesim/Pose.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -22,9 +24,10 @@ void ofApp::setup(){
 
 	//Ros create publisher
 	//======================================================
-	pub_ = n_.advertise<std_msgs::String>(pub_sub_name, 1000);
+	pub_ = n_.advertise<turtlesim::Pose>(pub_sub_name, 1000);
 	//======================================================
 	
+
 }
 
 //--------------------------------------------------------------
@@ -40,16 +43,23 @@ void ofApp::update() {
 	//Create and publish ROS messages
 	//======================================================
 	std_msgs::String msg;
+	turtlesim::Pose pose_msg;
+	
 	std::stringstream ss;
 	for(int i = 0;i<objects.size();i++)
 	{
 		if(objects[i].objectID == 4)
 			{
-			ss << objects[i].objectID << "#" <<objects[i].xReal << "," << objects[i].yReal << "," << (360-(objects[i].angle -90))%360  << endl;
+			
+			ss << objects[i].objectID << "#" <<objects[i].xReal << "," << objects[i].yReal << "," << objects[i].angle << endl;
 			msg.data = ss.str();
-
 			ROS_INFO("%s", msg.data.c_str());
-			pub_.publish(msg);
+
+			pose_msg.x = objects[i].xReal/100;
+			pose_msg.y =  objects[i].yReal/100;
+			pose_msg.theta = objects[i].angle;
+			
+			pub_.publish(pose_msg);
 			ros::spinOnce();
 			}
 	}
@@ -118,12 +128,20 @@ void ofApp::keyReleased(int key){
 		{
 			setField = false;
 
-			std:cout << "Enter Width in CM: ";
+			std::cout << "Enter Width in CM: ";
 			std::cin >> widthValReal ;
 			std::cout << "Enter Height in CM: ";
 			std::cin >> heightValReal;
 
-			if(objects.size() == 2)
+			//BERNAHRD ---->
+			int bernhard = 0;
+			for(auto o : objects) {
+				//HIER VLT POSITION VON o in Bernhard Speichern und dann später ausschliessen -> Geht aber meistens so auch, sonst aufstehen und kringel etwas verschieben
+				if(o.objectID == 4) bernhard = 1;
+				
+			}
+			//Hier nochmal checken nicht schön!!!!
+			if(objects.size() == 2 || (bernhard && objects.size() == 3))
 			{
 				if(objects[0].pos.x < objects[1].pos.x)
 				{
@@ -147,7 +165,10 @@ void ofApp::keyReleased(int key){
 			}
 			setField = true;
 			
-			//std::cout << "xField = " << xField << " yField = " << yField << " widthField = " << widthField << " heightField = " << heightField << std::endl;
+	//=============================TEST====================================
+	//std::cout << "xField = " << xField << " yField = " << yField << " widthField = " << widthField << " heightField = " << heightField << std::endl;
+	//=====================================================================
+			
 		}
 	//======================================================
 }
@@ -170,17 +191,6 @@ void ofApp::mousePressed(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
 
-	//Console Out of actual Positions of Robots 
-	//======================================================
-		for (int i = 0; i < objects.size(); i++)
-		{
-		//getReal Coordinates
-			if(setField)
-			{	
-			std::cout << "ID " << objects[i].objectID << "// x (pixel):" << objects[i].pos.x << " x (cm):" << objects[i].xReal <<" y (pixel):" << objects[i].pos.y << " y (cm):" << objects[i].yReal<< " Angle (Deg): " <<(360-(objects[i].angle -90))%360 <<endl;
-			}	
-		}
-	//======================================================
 }
 
 //--------------------------------------------------------------
@@ -214,16 +224,23 @@ void ofApp::tuioAdded(ofxTuioObject& tuioObject)
 	long id = tuioObject.getSessionID();
 	float x = tuioObject.getScreenX(ofGetWidth());
 	float y = tuioObject.getScreenY(ofGetHeight());
-	long angle  = tuioObject.getAngleDegrees();
 
+	//Umrechnung Grad in Bogenmaß passend für Roboter
+	long l_angle  = tuioObject.getAngleDegrees();
+	float f_angle = ((360-(l_angle -90))%360) * (3.141/180.0);
+	
+	//Neues Objekt dem Object Vector hinzufügen
 	object o;
 	o.sessionID = id;
 	o.objectID = objectID;
 	o.pos.x = x;
 	o.pos.y = y;
-	o.angle = angle;
+	o.angle = f_angle;
 	objects.push_back(o);
+
+	//=============================TEST====================================
 	//cout << "add " << objectID << " at Session " << id << "    xPos =" << o.pos.x << "    yPos =" << o.pos.y << "    angle=" << o.angle  << endl;
+	//=====================================================================
 }
 
 void ofApp::tuioUpdated(ofxTuioObject& tuioObject)
@@ -232,33 +249,44 @@ void ofApp::tuioUpdated(ofxTuioObject& tuioObject)
 	long id = tuioObject.getSessionID();
 	float x = tuioObject.getScreenX(ofGetWidth());
 	float y = tuioObject.getScreenY(ofGetHeight());
-	long angle = tuioObject.getAngleDegrees();
+	
+	//Umrechnung Grad in Bogenmaß passend für Roboter
+	long l_angle = tuioObject.getAngleDegrees();
+	float f_angle = ((360-(l_angle -90))%360) * (3.141/180.0);
 
+	//Object Vector updaten
 	vector<object> o = objects;
 	for (int i = 0; i < o.size(); i++)
 	{
 		if (o[i].sessionID != id) continue;
 		o[i].pos.x = x;
 		o[i].pos.y = y;
-		o[i].angle = angle;
+		o[i].angle = f_angle;
 
 	}
 
+	objects = o;
+
+	//=============================TEST====================================
 	/*for (int i = 0; i < o.size(); i++)
 	{
 		cout << "update " << objectID << " at Session " << id << "    xPos =" << o[i].pos.x << "    yPos =" << o[i].pos.y << "    angle=" << o[i].angle << endl;
 	
 	}*/
-
-	objects = o;
+	//=====================================================================
+	
 }
 
 void ofApp::tuioRemoved(ofxTuioObject& tuioObject)
 {
 	long objectID = tuioObject.getSymbolID();
 	long id = tuioObject.getSessionID();
-	//cout << "remove " << objectID << "at Session " << id << endl;
 
+	//=============================TEST====================================
+	//cout << "remove " << objectID << "at Session " << id << endl;
+	//=====================================================================
+
+	//Objekt von Object Vector entfernen
 	vector<object> o = objects;
 	for (int i = 0; i < o.size(); i++) {
 		if (o[i].sessionID != id) continue;

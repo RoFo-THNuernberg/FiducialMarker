@@ -39,12 +39,13 @@ class ofApp : public ofBaseApp{
 			ofVec2f pos;
 			long sessionID;
 			long objectID;
-			long angle;
+			//long angle;
+			float angle;
 			float xReal;
 			float yReal;
 		};
 
-		const std::string pub_sub_name = "/Robot1/pose2DCam"; //
+		const std::string pub_sub_name = "/robot_1/pose"; //
 
 		vector<object> objects;
 
