@@ -1,6 +1,6 @@
 PROJECT_LDFLAGS=-Wl,-rpath=./libs
 PROJECT_LDFLAGS+=$(SUBLIBS) $(ros_libs_nocolon) 
-#BERNHARD ADDED std_msgs and geometry_msgs
+#ADDED std_msgs and geometry_msgs
 ros_libs = $(shell pkg-config --libs roscpp nav_msgs std_msgs geometry_msgs turtlesim tf)
 ros_libs_nocolon = $(subst -l:,,$(ros_libs))
 PROJECT_OPTIMIZATION_CFLAGS_DEBUG = `pkg-config --cflags roscpp nav_msgs tf` -w -O2 
