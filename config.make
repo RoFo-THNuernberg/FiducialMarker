@@ -1,3 +1,6 @@
+################################################################################
+#necessary to integrate ROS in OpenFrameworks
+################################################################################
 PROJECT_LDFLAGS=-Wl,-rpath=./libs
 PROJECT_LDFLAGS+=$(SUBLIBS) $(ros_libs_nocolon) 
 #ADDED std_msgs and geometry_msgs
@@ -5,6 +8,7 @@ ros_libs = $(shell pkg-config --libs roscpp nav_msgs std_msgs geometry_msgs turt
 ros_libs_nocolon = $(subst -l:,,$(ros_libs))
 PROJECT_OPTIMIZATION_CFLAGS_DEBUG = `pkg-config --cflags roscpp nav_msgs tf` -w -O2 
 PROJECT_OPTIMIZATION_CFLAGS_RELEASE = `pkg-config --cflags roscpp nav_msgs tf` -w -O2 
+
 ################################################################################
 # CONFIGURE PROJECT MAKEFILE (optional)
 #   This file is where we make project specific configurations.

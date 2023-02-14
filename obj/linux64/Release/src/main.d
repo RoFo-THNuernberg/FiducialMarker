@@ -559,6 +559,18 @@ obj/linux64/Release/src/main.o: \
  /home/kamera/Bildverarbeitung/OF/addons/ofxTuio/libs/ofxTuio/include/WebSockSender.h \
  /home/kamera/Bildverarbeitung/OF/addons/ofxTuio/libs/ofxTuio/include/FlashSender.h \
  /home/kamera/Bildverarbeitung/OF/addons/ofxTuio/libs/ofxTuio/include/TuioCursor.h \
+ /home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxGui.h \
+ /home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxToggle.h \
+ /home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxBaseGui.h \
+ /home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxSlider.h \
+ /home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxInputField.h \
+ /home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxGuiUtils.h \
+ /home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxSliderGroup.h \
+ /home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxGuiGroup.h \
+ /home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxButton.h \
+ /home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxLabel.h \
+ /home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxColorPicker.h \
+ /home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxPanel.h \
  /opt/ros/noetic/include/ros/ros.h /opt/ros/noetic/include/ros/time.h \
  /opt/ros/noetic/include/ros/platform.h \
  /opt/ros/noetic/include/ros/exception.h \
@@ -1773,6 +1785,30 @@ obj/linux64/Release/src/main.o: \
 /home/kamera/Bildverarbeitung/OF/addons/ofxTuio/libs/ofxTuio/include/FlashSender.h:
 
 /home/kamera/Bildverarbeitung/OF/addons/ofxTuio/libs/ofxTuio/include/TuioCursor.h:
+
+/home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxGui.h:
+
+/home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxToggle.h:
+
+/home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxBaseGui.h:
+
+/home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxSlider.h:
+
+/home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxInputField.h:
+
+/home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxGuiUtils.h:
+
+/home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxSliderGroup.h:
+
+/home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxGuiGroup.h:
+
+/home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxButton.h:
+
+/home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxLabel.h:
+
+/home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxColorPicker.h:
+
+/home/kamera/Bildverarbeitung/OF/addons/ofxGui/src/ofxPanel.h:
 
 /opt/ros/noetic/include/ros/ros.h:
 
